@@ -1,18 +1,25 @@
 # https://www.youtube.com/@STIG_Automation #
 ## Get all open items from a directory of STIG checklists and output to gridview
 
-$Allitems = Get-Childitem -Path "C:\Users\admin\Documents\*" -Include *.ckl ## Grab all CKL files from directory
-$VulnStatus = "Not_Reviewed" ## Valid options: NotAFinding, Open, Not_reviewed
-$AllObjects = @() ## 
+## Grab all CKL files from directory
+$Allitems = Get-Childitem -Path "C:\Users\admin\Documents\*" -Include *.ckl
 
+## THIS LOOKS FOR WHATEVER STATUS YOU PROVIDE
+$VulnStatus = "Not_Reviewed" ## Valid options: NotAFinding, Open, Not_reviewed
+
+## Empty object for later use when we build pretty output
+$AllObjects = @()
+
+## Final output path and filename
 $Outputpath = "C:\Users\admin\Documents\testvideo1.csv"
 
+## Foreach different checklist in the directory we are looking in
 Foreach ($CKL in $Allitems){
 
-## Convert checklist to XML Object
+## Convert single checklist to XML Object
 [XML]$SingleCKL = Get-Content $CKL
 
-## Assign every vulnerability in STIG checklist to an array variable
+## Assign every vulnerability in single STIG checklist to an array variable
 $Eachvuln = $SingleCKL.CHECKLIST.STIGS.iSTIG.VULN
 
 ## Lets start a foor loop so we can grab info from each individual STIG vuln
