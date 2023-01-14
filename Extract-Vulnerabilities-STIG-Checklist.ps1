@@ -1,4 +1,5 @@
-﻿## Get all open items from a directory of STIG checklists and output to .csv file
+# https://www.youtube.com/@STIG_Automation #
+## Get all open items from a directory of STIG checklists and output to gridview
 
 $Allitems = Get-Childitem -Path "C:\Users\admin\Documents\*" -Include *.ckl ## Grab all CKL files from directory
 $VulnStatus = "Not_Reviewed" ## Valid options: NotAFinding, Open, Not_reviewed
